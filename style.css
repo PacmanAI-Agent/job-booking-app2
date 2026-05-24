@@ -1,6 +1,6 @@
 /* Simple, mobile-friendly styling */
 :root {
-  --primary: #0066CC; /* teal – change if you want another colour */
+  --primary: #0066CC;
   --bg: #f9f9f9;
   --text: #333;
 }
@@ -43,35 +43,43 @@ button {
 button:active { opacity: .9; }
 
 .checkboxes {
-  /* existing */
-}
-
-/* Date spinner layout */
-.date-spinner {
-  display: flex;
-  align-items: center;
-  margin-top: .5rem;
-}
-.date-spinner input {
-  flex: 1;
-}
-.date-spinner button {
-  width: 2rem;
-  height: 2rem;
-  margin-left: .3rem;
-  font-size: 1rem;
-  line-height: 1;
-  padding: 0;
-}
-
-/* Inline mobiscroll wheel */
-.date-wheel {
-  margin-top: .5rem;
-}
-
   display: flex;
   gap: 1rem;
   margin-top: .5rem;
 }
 .checkboxes label { font-weight: normal; }
 #status { margin-top: 1rem; text-align: center; }
+
+/* Multiple jobs styling */
+.job-entry {
+  background: white;
+  padding: 1rem;
+  border-radius: .5rem;
+  margin-bottom: 1rem;
+  border: 1px solid #ddd;
+}
+.job-entry h3 {
+  margin: 0 0 1rem 0;
+  color: var(--primary);
+}
+
+.button-row {
+  display: flex;
+  gap: 1rem;
+}
+.button-row button {
+  flex: 1;
+}
+
+.secondary {
+  background: #666;
+}
+
+.remove-job {
+  background: #d33;
+  margin-top: 0.5rem;
+  padding: 0.3rem 0.5rem;
+  font-size: 0.8rem;
+  width: auto;
+  float: right;
+}

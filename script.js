@@ -35,19 +35,21 @@ addJobBtn.addEventListener('click', function() {
     <label for="destination_${jobCount}">Company Destination</label>
     <input type="text" id="destination_${jobCount}" name="Destination" placeholder="e.g. 123 Main St" required>
 
+    <label for="description_${jobCount}">Description</label>
+    <textarea id="description_${jobCount}" name="Description" rows="3" placeholder="Job details" required></textarea>
+
+    <label for="phone_${jobCount}">Phone (optional)</label>
+    <input type="tel" id="phone_${jobCount}" name="Phone" placeholder="e.g. 022 370 3540">
+
+
     <label for="address_${jobCount}">Address (optional)</label>
     <input type="text" id="address_${jobCount}" name="Address" placeholder="e.g. Suite 5, 456 Oak Ave">
 
-    <label for="description_${jobCount}">Description</label>
-    <textarea id="description_${jobCount}" name="Description" rows="3" placeholder="Job details" required></textarea>
 
     <div class="checkboxes">
       <label><input type="checkbox" name="PickUp_${jobCount}" value="Yes"> Pick-up</label>
       <label><input type="checkbox" name="DropOff_${jobCount}" value="Yes"> Drop-off</label>
     </div>
-
-    <label for="phone_${jobCount}">Phone (optional)</label>
-    <input type="tel" id="phone_${jobCount}" name="Phone" placeholder="e.g. 022 370 3540">
 
     <label for="attachments_${jobCount}">Attachments (photos / docs)</label>
     <input type="file" id="attachments_${jobCount}" name="Attachments" accept="image/*,application/pdf" multiple>

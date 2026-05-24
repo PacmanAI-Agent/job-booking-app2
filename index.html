@@ -19,6 +19,10 @@
 <input type="hidden" id="company" name="Company" value="Arkwright's Freight Ltd">
 <p style="font-weight: bold; text-align:center; margin-top:0.5rem;">Arkwright's Freight Ltd</p>
 
+<!-- Date selector (shared for all jobs) - moved to top -->
+<label for="date-picker">Date</label>
+<input type="date" id="date-picker" name="Date" required>
+
 <div id="jobs-container">
   <!-- Job template - first job -->
   <div class="job-entry">
@@ -45,10 +49,6 @@
     <input type="file" id="attachments_1" name="Attachments" accept="image/*,application/pdf" multiple>
   </div>
 </div>
-
-<!-- Date selector (shared for all jobs) -->
-<label for="date-picker">Date</label>
-<input type="date" id="date-picker" name="Date" required>
 
 <div class="button-row">
   <button type="button" id="addJobBtn" class="secondary">+ Add Another Job</button>

@@ -1,4 +1,4 @@
-// ==== CONFIG – put your Airtable details here ====
+// ==== CONFIG - put your Airtable details here ====
 const AIRTABLE_API_KEY = 'YOUR_AIRTABLE_API_KEY';
 const BASE_ID       = 'appX0OtnSWt8JOKvh';
 const TABLE_ID      = 'tblHkIbvRNOcx6lVQ';   // Fleet Management table
@@ -11,33 +11,12 @@ const companyInput = document.getElementById('company');
 const companyName = companyInput ? companyInput.value : '';
 const statusEl = document.getElementById('status');
 
-// Auto‑fill today’s date and initialise the Mobiscroll date picker on page load
-// Ensure default Mobiscroll settings (theme)
-if (typeof mobiscroll !== 'undefined') {
-  mobiscroll.settings = { theme: 'ios' };
-}
+// Auto‑fill today\u2019s date (native date input)
 function initDatePicker() {
-  if (typeof mobiscroll !== 'undefined') {
-    mobiscroll.Datepicker('#date-picker', {
-      theme: 'ios',
-      display: 'inline', // inline spin‑wheel visible on page
-      dateFormat: 'dd MM yy',
-      defaultValue: new Date(),
-      dateWheels: [
-        ['dd'],
-        ['mm'],
-        ['yy']
-      ],
-      // When user selects a date, copy it into the hidden input for form submission
-      onSet: function (event, inst) {
-        const hidden = document.getElementById('date-value');
-        if (hidden) hidden.value = event.valueText; // formatted as defined by dateFormat
-      }
-    });
-  } else {
-    // Fallback to native date input (if we ever revert)
-    const dateInput = document.getElementById('date-picker');
-    if (dateInput) dateInput.valueAsDate = new Date();
+  const dateInput = document.getElementById('date-picker');
+  if (dateInput) {
+    const today = new Date().toISOString().split('T')[0];
+    dateInput.value = today;
   }
 }
 
@@ -50,7 +29,7 @@ if (document.readyState === 'loading') {
 
 form.addEventListener('submit', async e => {
   e.preventDefault();
-  statusEl.textContent = 'Sending…';
+  statusEl.textContent = 'Sending...';
 
   const formData = new FormData(form);
   const fields = {};
@@ -65,7 +44,7 @@ form.addEventListener('submit', async e => {
   fields.PickUp = formData.get('PickUp') ? 'Yes' : 'No';
   fields.DropOff = formData.get('DropOff') ? 'Yes' : 'No';
 
-  // Attachments – upload each file then store URLs
+  // Attachments - upload each file then store URLs
   const attachments = formData.getAll('Attachments');
   if (attachments.length) {
     const uploaded = await Promise.all(attachments.map(uploadFile));
@@ -85,20 +64,15 @@ form.addEventListener('submit', async e => {
     await resp.json();
     statusEl.textContent = '✅ Job booked!';
     form.reset();
-    // Reset hidden date field after successful submit
-      const hiddenDate = document.getElementById('date-value');
-      if (hiddenDate) hiddenDate.value = '';
-      // Also reset Mobiscroll picker to today
-      if (typeof mobiscroll !== 'undefined') {
-        mobiscroll.getInst('#date-picker').setValue(new Date(), true);
-      }
+    // Reset date to today after successful submit
+    initDatePicker();
   } catch (err) {
     console.error(err);
-    statusEl.textContent = '❌ Failed – check console';
+    statusEl.textContent = '❌ Failed - check console';
   }
 });
 
-// Helper – upload a file to Airtable's attachment endpoint
+// Helper - upload a file to Airtable's attachment endpoint
 async function uploadFile(file) {
   const uploadResp = await fetch('https://api.airtable.com/v0/meta/files', {
     method: 'POST',

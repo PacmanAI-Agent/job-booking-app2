@@ -6,7 +6,7 @@
 <title>Job Booking</title>
 <link rel="manifest" href="manifest.json">
 <link rel="stylesheet" href="style.css">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@mobiscroll/javascript@5.16.0/dist/css/mobiscroll.min.css">
+
 </head>
 <body>
 <header>
@@ -46,8 +46,8 @@
 <label for="attachments">Attachments (photos / docs)</label>
 <input type="file" id="attachments" name="Attachments" accept="image/*,application/pdf" multiple>
 
-<!-- Date selector (spin‑wheel) -->
-<input type="text" id="date-picker" name="Date" required placeholder="Select date">
+<!-- Date selector -->
+<input type="date" id="date-picker" name="Date" required>
 
 <button type="submit">Book Job</button>
 </form>
@@ -56,29 +56,12 @@
 
 </main>
 
-<script src="https://cdn.jsdelivr.net/npm/@mobiscroll/javascript@5.16.0/dist/js/mobiscroll.min.js"></script>
 <script>
-  // Ensure Mobiscroll theme is set before initialization
-  if (typeof mobiscroll !== 'undefined') {
-    mobiscroll.settings = { theme: 'ios' };
-  }
-  // Initialise date picker once DOM is ready
-  document.addEventListener('DOMContentLoaded', function () {
-    if (typeof mobiscroll !== 'undefined') {
-      mobiscroll.Datepicker('#date-picker', {
-        display: 'inline', // inline spin‑wheel style
-        dateFormat: 'dd MM yy',
-        defaultValue: new Date(),
-        dateWheels: [
-          ['dd'],
-          ['mm'],
-          ['yy']
-        ]
-      });
-    } else {
-      // Fallback for native input if Mobiscroll fails to load
-      const dateInput = document.getElementById('date-picker');
-      if (dateInput) dateInput.valueAsDate = new Date();
+  // Set default date to today on page load
+  document.addEventListener('DOMContentLoaded', function() {
+    const dateInput = document.getElementById('date-picker');
+    if (dateInput) {
+      dateInput.value = new Date().toISOString().split('T')[0];
     }
   });
 </script>
